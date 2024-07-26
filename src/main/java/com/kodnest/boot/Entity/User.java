@@ -35,7 +35,6 @@ public class User {
 		this.isPremium = isPremium;
 	}
 
-
 	public int getId() {
 		return id;
 	}
@@ -105,8 +104,5 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", gender="
 				+ gender + ", role=" + role + ", address=" + address + ", isPremium=" + isPremium + "]";
 	}
-
-	
-	
 
 }
