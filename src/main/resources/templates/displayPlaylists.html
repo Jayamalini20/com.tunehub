@@ -1,17 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<style type="text/css">
-iframe{
-	height:100px;
-	width:500px;
-	}
-</style>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #004080;
+            
+        }
+
+        .playlist {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .playlist-header {
+            background-color: #333;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .song-list {
+            padding: 12px;
+        }
+
+        .song-item {
+            margin-bottom: 10px;
+        }
+
+        audio {
+            width: 100%;
+        }
+    </style>
 </head>
+
 <body>
-<body>
+<header class="header">
+	<h1 class="message" >Tune In, Turn Up at TuneHub</h1>
+	 <a href="viewSongs">View all Songs</a>
+	 <a href="createPlaylist">Create Playlist</a>
+	 <a href="viewPlaylists">View all Playlists</a>
+    <a href="logout">LOGOUT</a>
+	</header>
+	<!-- 
 <table border="1">
 	<thead>
 		<tr>
@@ -36,6 +72,19 @@ iframe{
 		</tr>
 	</tbody>
 </table>
-
+ -->
+ <div th:each="plist:${allPlaylists}" class="playlist">
+        <div class="playlist-header" th:text="${plist.name}"></div>
+        <div class="song-list">
+            <ul>
+                <li th:each="song:${plist.songs}" class="song-item">
+                    <span th:text="${song.name}"></span>
+                    <audio controls>
+                        <source th:src="${song.link}" type="audio/mpeg">
+                    </audio>
+                </li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

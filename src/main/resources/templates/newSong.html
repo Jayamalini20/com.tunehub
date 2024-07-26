@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<header class="header">
+	<h1 class="message" >Tune In, Turn Up at TuneHub</h1>
+	 <a href="viewSongs">View all Songs</a>
+	 <a href="createPlaylist">Create Playlist</a>
+	 <a href="viewPlaylists">View all Playlists</a>
+    <a href="logout">LOGOUT</a>
+	</header>
 <form action="addSong" method="post">
         <label for="songname">Song name:</label>
         <input type="text" id="songname" name="name" required><br>

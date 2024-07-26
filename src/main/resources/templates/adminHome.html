@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Admin Home</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Admin Home</h1>
-<a href="newSong">Add a new Song</a>
-<br/>
-<a href="viewSongs">View all Songs</a>
-<a href="createPlaylist">Create Playlist</a>
-<a href="viewPlaylists">View all Playlists</a>
+<header class="header">
+	<h1 class="message" >Tune In, Turn Up at TuneHub</h1>
+	 <a href="viewSongs">View all Songs</a>
+	 
+	 <a href="createPlaylist">Create Playlist</a>
+	 <a href="viewPlaylists">View all Playlists</a>
+    <a href="logout">LOGOUT</a>
+	</header>
+<table border="1">
+<tr><td><a href="newSong">Add a new Song</a></td></tr>
+<tr><td></td></tr>
+<tr><td><a href="viewSongs">View all Songs</a></td></tr>
+<tr><td></td></tr>
+<tr><td><a href="createPlaylist">Create Playlist</a></td></tr>
+<tr><td></td></tr>
+<tr><td><a href="viewPlaylists">View all Playlists</a></td></tr>
+<tr><td></td></tr>
+
+
+</table>
+
+
+
+
 </body>
 </html>

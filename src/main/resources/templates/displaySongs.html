@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 <style type="text/css">
 iframe{
 	height:100px;
@@ -12,6 +13,13 @@ iframe{
 
 </head>
 <body>
+<header class="header">
+	<h1 class="message" >Tune In, Turn Up at TuneHub</h1>
+	 <a href="viewSongs">View all Songs</a>
+	 <a href="createPlaylist">Create Playlist</a>
+	 <a href="viewPlaylists">View all Playlists</a>
+    <a href="logout">LOGOUT</a>
+	</header>
 <table border="1">
 	<thead>
 		<tr>
@@ -26,7 +34,7 @@ iframe{
 			<td th:text="${song.name}"></td>
 			<td th:text="${song.artist}"></td>
 			<td th:text="${song.genre}"></td>
-			<!--<td th:utext="${song.link}"></td>-->
+			
 			  
 			<td>
 				<audio controls>

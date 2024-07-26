@@ -1,13 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<style type="text/css">
+ h1 {
+ padding-top:50px;
+            color: green;
+            text-align:center;
+        }
+
+        .premium-features {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 400px;
+            padding: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+		a{
+		padding-left:500px;
+		}
+        .cta-button:hover {
+        
+            background-color: #45a049;
+            
+        }
+        
+    
+</style>
 </head>
 <body>
-<h1>Customer Home</h1>
-<a href="pay">Get Premium</a>
-<br>
-<a href="logout">LOGOUT</a>
+
+
+
+	<div th:unless="${isPremium}" class="non-premium">
+	<header class="header">
+	<h1 class="message" >Tune In, Turn Up at TuneHub</h1>
+	 <a href="pay">Get Premium</a>
+    <a href="logout">LOGOUT</a>
+	</header>
+		<h1>Upgrade to TuneHub Premium!</h1>
+    
+    <div class="premium-features">
+        <h2>Premium Features:</h2>
+        <ul>
+            <li>Ad-Free Listening</li>
+            <li>High-Quality Audio Streaming</li>
+            <li>Exclusive Content and Releases</li>
+            <li>Offline Mode for Downloading Songs</li>
+            <li>Early Access to New Releases</li>
+            <li>Custom Playlists with Unlimited Skips</li>
+            <li>Concert and Event Discounts</li>
+            <li>Lyrics and Song Information</li>
+            <li>Multiple Device Access</li>
+            <li>Dedicated Customer Support</li>
+            <li>Customizable User Interface</li>
+            <li>Collaborations and Exclusive Features</li>
+        </ul>
+    </div>
+
+
+    	
+		
+		
+		
+	</div>
+	<div th:if="${isPremium}" class="premium">
+	<header class="header">
+	<h1 class="message" >Tune In, Turn Up at TuneHub</h1>
+	 <a href="viewSongs">View all Songs</a>
+	 <a href="createPlaylist">Create Playlist</a>
+	 <a href="viewPlaylists">View all Playlists</a>
+    <a href="logout">LOGOUT</a>
+	</header>
+		<table border="1">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Artist</th>
+			<th>Genre</th>
+			<th>Play</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="song:${songs}">
+			<td th:text="${song.name}"></td>
+			<td th:text="${song.artist}"></td>
+			<td th:text="${song.genre}"></td>
+			<!--<td th:utext="${song.link}"></td>-->
+			  
+			<td>
+				<audio controls>
+					<source th:src="${song.link}" type="audio/mpeg">
+				</audio>
+			</td>
+			
+		</tr>
+	</tbody>
+</table>
+	</div>
 </body>
 </html>

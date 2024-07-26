@@ -1,37 +1,31 @@
 package com.kodnest.boot.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kodnest.boot.Entity.Song;
 import com.kodnest.boot.Entity.User;
+import com.kodnest.boot.Service.SongService;
 import com.kodnest.boot.Service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
+//@CrossOrigin("*")
+//@RestController
 @Controller
 public class UserController {
 	@Autowired
 	UserService service;
 	
-
-	//@PostMapping("/register")
-	/*
-	 public String addUsers(@RequestParam("username") String username,
-			@RequestParam("email") String email,
-			@RequestParam("password") String password,
-			@RequestParam("gender") String gender,
-			@RequestParam("role") String role,
-			@RequestParam("address") String address)
-	{
-		System.out.println(username+" "+email+" "+password+" "+gender+" "+role+" "+address);
-		return "home";
-	}
-	*/
+	@Autowired
+	SongService songService;
 	
 	@PostMapping("/register")
 	public String addUsers(@ModelAttribute User user)
@@ -47,24 +41,37 @@ public class UserController {
 			System.out.println("User Alread Exist with same email ID...!");
 		}
 		
-		return "home";
+		return "login";
 	}
 
 	@PostMapping("/validate")
+	//public String validate(@RequestBody LoginData data, HttpSession session,Model model)
+	//{
+		//System.out.println("Call received");
+		//String email=data.getEmail();
+		//String password=data.getPassword();
 	public String validate(@RequestParam("email") String email,
-			@RequestParam("password") String password, HttpSession session)
+			@RequestParam("password") String password, HttpSession session, Model model)
 	{
-		
 		if(service.validateUser(email,password)==true)
 		{
 			String role=service.getRole(email);
 			session.setAttribute("email", email);//creating a session object for user to store user activity
 			if(role.equals("admin"))
 			{
+				System.out.println("Admin Home Call received");
 				return "adminHome";
 			}
 			else
 			{
+				System.out.println("Customer Home Call received");
+				User user=service.getUser(email);
+				boolean userStatus =user.isPremium();
+				
+				List<Song> songList=songService.fetchAllSongs();
+				model.addAttribute("songs",songList);
+				
+				model.addAttribute("isPremium", userStatus);
 				return "customerHome";
 			}
 			
